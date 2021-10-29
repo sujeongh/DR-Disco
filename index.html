@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <title>DR:DISCO</title>
+        <style>
+body {margin: 0; overflow: hidden; color: #ffffff;}
+
+.loading{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #311d41;
+    z-index: 100;
+}
+
+.wait{
+    position: absolute;
+    top: 52%;
+}
+
+.icon{
+    width: 40px;
+    margin-bottom: 50px;
+}
+
+.icon2{
+    margin-right: 10px;
+}
+
+.loading1{
+    animation-name: floating;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+}
+
+.loading2{
+    animation-name: floating;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.loading3{
+    animation-name: floating;
+    animation-duration: .8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.loading4{
+    animation-name: floating2;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.loading5{
+    animation-name: floating2;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes floating  {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }    
+}
+@keyframes floating2  {
+    0% { transform: translate(0,  -2px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }    
+}
+
+.guide{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 100;
+    background-color: #000000D9;
+    z-index: 1;
+    display: none;
+}
+
+.guideLayout{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.guide-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;
+    width: 300px;
+}
+
+p{
+    text-align: center;
+}
+
+.title{
+    font-size: 28px;
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+.sub-title{
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* 가이드 버튼 */
+button{
+    border: 0;
+    outline: 0;
+    background-color: 0;
+    z-index: 10;
+}
+
+.guide-btn{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    background-color: none;
+}
+
+
+video {   
+    position: absolute;
+    left: 50vw;
+    top: 14vh;
+    transform: translate(-50% , 0);
+
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .guideLayout{
+        display: flex;
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+    .guide-detail{
+        height: 200px;
+        width: 300px;
+        margin-bottom: 30px;
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 600px) {
+    .title{
+        font-size: 20px;
+        margin-top: 50px;
+    }
+
+    .sub-title{
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .guideLayout{
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .guide-detail{
+        margin-bottom: 10px;
+        transform: scale(0.8);
+    }
+}
+
+        </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+    <body>
+        <div class="loading" id="small">
+            <div>
+            <svg class="icon loading1" width="24" height="33" viewBox="0 0 24 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="26" r="6" stroke="white" stroke-width="2"/>
+                <path d="M13 26.5V1H24" stroke="white" stroke-width="2"/>
+            </svg> 
+            
+            <svg class="icon loading2 icon2" width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="33" r="6" stroke="white" stroke-width="2"/>
+                <circle cx="28" cy="27" r="6" stroke="white" stroke-width="2"/>
+                <path d="M13 33.5V8L34 2V27.5" stroke="white" stroke-width="2"/>
+                <path d="M13 14L34 8" stroke="white" stroke-width="2"/>
+            </svg> 
+
+            <svg class="icon loading3" width="24" height="33" viewBox="0 0 24 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="26" r="6" stroke="white" stroke-width="2"/>
+                <path d="M13 26.5V1H24" stroke="white" stroke-width="2"/>
+            </svg> 
+
+            <svg class="icon loading4 icon2" width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="33" r="6" stroke="white" stroke-width="2"/>
+                <circle cx="28" cy="27" r="6" stroke="white" stroke-width="2"/>
+                <path d="M13 33.5V8L34 2V27.5" stroke="white" stroke-width="2"/>
+                <path d="M13 14L34 8" stroke="white" stroke-width="2"/>
+            </svg> 
+
+            <svg class="icon loading5" width="24" height="33" viewBox="0 0 24 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="26" r="6" stroke="white" stroke-width="2"/>
+                <path d="M13 26.5V1H24" stroke="white" stroke-width="2"/>
+            </svg> 
+            </div>
+
+            <p class="wait">잠시만 기다려주세요</p>
+        </div>
+
+        <!-- 가이드 버튼 -->
+        <a class="guide-btn open">
+            <svg width="31" height="28" viewBox="0 0 31 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.3999 0.650024C0.847618 0.650024 0.399902 1.09774 0.399902 1.65002V22.2334C0.399902 22.7856 0.847618 23.2334 1.3999 23.2334H11.4099C12.2955 23.2334 13.1369 23.5713 13.751 24.1606C14.3631 24.748 14.6992 25.5355 14.6999 26.3477C14.6999 26.3484 14.6999 26.3492 14.6999 26.35C14.6999 26.9023 15.1476 27.35 15.6999 27.35C16.2522 27.35 16.6999 26.9023 16.6999 26.35C16.6999 26.3489 16.6999 26.3477 16.6999 26.3466C16.7008 25.5195 17.0281 24.7276 17.6083 24.1443C18.1891 23.5604 18.9758 23.2334 19.7949 23.2334H29.3499C29.9022 23.2334 30.3499 22.7856 30.3499 22.2334V1.65002C30.3499 1.09774 29.9022 0.650024 29.3499 0.650024H21.1599C19.4449 0.650024 17.8012 1.33496 16.5901 2.55244C16.2416 2.90279 15.9372 3.28897 15.6802 3.70232C15.4085 3.282 15.086 2.89028 14.7169 2.53615C13.4538 1.32407 11.7492 0.650024 9.9799 0.650024H1.3999ZM14.6999 7.1367C14.6993 5.96058 14.2125 4.824 13.3322 3.97922C12.4499 3.13256 11.2447 2.65002 9.9799 2.65002H2.3999V21.2334H11.4099C12.606 21.2334 13.7657 21.6254 14.6999 22.3431V7.13891C14.6999 7.13818 14.6999 7.13744 14.6999 7.1367ZM16.6999 22.2856C17.5832 21.6072 18.6695 21.2334 19.7949 21.2334H28.3499V2.65002H21.1599C19.9787 2.65002 18.8449 3.12167 18.0081 3.96292C17.1711 4.80435 16.6999 5.94669 16.6999 7.13891L16.6999 22.2856Z" fill="#ffffff"/>
+            </svg>                            
+        </a>
+
+        <div class="guide">
+            <a class="guide-btn closed">
+                <svg width="31" height="28" viewBox="0 0 31 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.3999 0.650024C0.847618 0.650024 0.399902 1.09774 0.399902 1.65002V22.2334C0.399902 22.7856 0.847618 23.2334 1.3999 23.2334H11.4099C12.2955 23.2334 13.1369 23.5713 13.751 24.1606C14.3631 24.748 14.6992 25.5355 14.6999 26.3477C14.6999 26.3484 14.6999 26.3492 14.6999 26.35C14.6999 26.9023 15.1476 27.35 15.6999 27.35C16.2522 27.35 16.6999 26.9023 16.6999 26.35C16.6999 26.3489 16.6999 26.3477 16.6999 26.3466C16.7008 25.5195 17.0281 24.7276 17.6083 24.1443C18.1891 23.5604 18.9758 23.2334 19.7949 23.2334H29.3499C29.9022 23.2334 30.3499 22.7856 30.3499 22.2334V1.65002C30.3499 1.09774 29.9022 0.650024 29.3499 0.650024H21.1599C19.4449 0.650024 17.8012 1.33496 16.5901 2.55244C16.2416 2.90279 15.9372 3.28897 15.6802 3.70232C15.4085 3.282 15.086 2.89028 14.7169 2.53615C13.4538 1.32407 11.7492 0.650024 9.9799 0.650024H1.3999ZM14.6999 7.1367C14.6993 5.96058 14.2125 4.824 13.3322 3.97922C12.4499 3.13256 11.2447 2.65002 9.9799 2.65002H2.3999V21.2334H11.4099C12.606 21.2334 13.7657 21.6254 14.6999 22.3431V7.13891C14.6999 7.13818 14.6999 7.13744 14.6999 7.1367ZM16.6999 22.2856C17.5832 21.6072 18.6695 21.2334 19.7949 21.2334H28.3499V2.65002H21.1599C19.9787 2.65002 18.8449 3.12167 18.0081 3.96292C17.1711 4.80435 16.6999 5.94669 16.6999 7.13891L16.6999 22.2856Z" fill="#ffffff"/>
+                </svg>                            
+            </a>
+
+            <p class="title">DR:DISCO에 오신것을 환영합니다.</p>
+            <p class="sub-title">전 당신의 가이드 Mr.DISCO입니다.</p>
+
+            <div class="guideLayout">
+                <div class="guide-detail">
+                    <div></div>
+                    <div class="mic-animation"> 
+                        <svg width="41" height="166" viewBox="0 0 41 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="39" height="61" rx="12" stroke="white" stroke-width="2"/>
+                            <path d="M23 84L18 84L18 162.5C18 163.881 19.1193 165 20.5 165C21.8807 165 23 163.881 23 162.5L23 84Z" stroke="white" stroke-width="2"/>
+                            <path d="M15 62H26V82C26 83.1046 25.1046 84 24 84H17C15.8954 84 15 83.1046 15 82V62Z" stroke="white" stroke-width="2"/>
+                            <path d="M1 23.4634H13.1951C14.7442 23.4634 16 24.7192 16 26.2683C16 27.8174 14.7442 29.0732 13.1951 29.0732H1V23.4634Z" stroke="white" stroke-width="2"/>
+                            <path d="M1 13H13.1951C14.7442 13 16 14.2558 16 15.8049C16 17.354 14.7442 18.6098 13.1951 18.6098H1V13Z" stroke="white" stroke-width="2"/>
+                            <path d="M1 33.9268H13.1951C14.7442 33.9268 16 35.1826 16 36.7317C16 38.2808 14.7442 39.5366 13.1951 39.5366H1V33.9268Z" stroke="white" stroke-width="2"/>
+                            <path d="M1 44.3903H13.1951C14.7442 44.3903 16 45.646 16 47.1951C16 48.7442 14.7442 50 13.1951 50H1V44.3903Z" stroke="white" stroke-width="2"/>
+                            <path d="M40 50L27.8049 50C26.2558 50 25 48.7442 25 47.1951C25 45.646 26.2558 44.3902 27.8049 44.3902L40 44.3902L40 50Z" stroke="white" stroke-width="2"/>
+                            <path d="M40 39.5366L27.8049 39.5366C26.2558 39.5366 25 38.2808 25 36.7317C25 35.1826 26.2558 33.9268 27.8049 33.9268L40 33.9268L40 39.5366Z" stroke="white" stroke-width="2"/>
+                            <path d="M40 29.0732L27.8049 29.0732C26.2558 29.0732 25 27.8174 25 26.2683C25 24.7192 26.2558 23.4634 27.8049 23.4634L40 23.4634L40 29.0732Z" stroke="white" stroke-width="2"/>
+                            <path d="M40 18.6097L27.8049 18.6097C26.2558 18.6097 25 17.354 25 15.8049C25 14.2558 26.2558 13 27.8049 13L40 13L40 18.6097Z" stroke="white" stroke-width="2"/>
+                        </svg>                                                              
+                    </div>
+                    
+                    <p>노래를 부르고싶다면<br>마이크를 클릭 해보세요.</p>
+                </div>
+                
+                <div class="guide-detail">
+                    <div></div>
+                    <div class="mirrorball-animation">
+                        <svg width="182" height="182" viewBox="0 0 182 182" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M107.268 29.8143L135.619 46.1823L151.987 74.5325L151.987 107.268L135.619 135.619L107.268 151.987H74.5324L46.1822 135.619L29.8142 107.268L29.8142 74.5325L46.1822 46.1823L74.5324 29.8143H107.268Z" stroke="white" stroke-width="2"/>
+                            <line x1="29.083" y1="74.3923" x2="152.718" y2="74.3923" stroke="white" stroke-width="2"/>
+                            <line x1="29.083" y1="106.76" x2="152.718" y2="106.76" stroke="white" stroke-width="2"/>
+                            <line x1="107.084" y1="29.7584" x2="107.084" y2="153.394" stroke="white" stroke-width="2"/>
+                            <line x1="74.7168" y1="29.7584" x2="74.7168" y2="153.394" stroke="white" stroke-width="2"/>
+                            <rect x="47" y="47" width="88" height="87" stroke="white" stroke-width="2"/>
+                        </svg>                                       
+                    </div>
+                    
+                    <p>미러볼 효과를 경험하고 싶다면<br>미러볼을 클릭 해주세요.</p>
+                </div>
+
+                <div class="guide-detail">
+                    <div></div>
+                    <div class="music-animation"> 
+                        <svg width="102" height="91" viewBox="0 0 102 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="41.6807" cy="26.2683" r="6" stroke="white" stroke-width="2"/>
+                            <circle cx="73.6807" cy="73.2683" r="6" stroke="white" stroke-width="2"/>
+                            <circle cx="94.6807" cy="67.2683" r="6" stroke="white" stroke-width="2"/>
+                            <circle cx="7.18066" cy="83.2683" r="6" stroke="white" stroke-width="2"/>
+                            <path d="M13.1807 83.7683V58.2683H24.1807" stroke="white" stroke-width="2"/>
+                            <path d="M47.6807 26.7683V1.26831H58.6807" stroke="white" stroke-width="2"/>
+                            <path d="M79.6807 73.7683V48.2683L100.681 42.2683V67.7683" stroke="white" stroke-width="2"/>
+                            <path d="M79.6807 54.2683L100.681 48.2683" stroke="white" stroke-width="2"/>
+                        </svg>                        
+                    </div>
+                    
+                    <p>각각의 악기를 클릭하면<br>다양한 소리를 들을 수 있어요.</p>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="three"></canvas>
+
+        <!-- 동영상 재생 -->
+        <video muted autoplay loop class="musicvideo">
+            <source src="video/00.mp4" type="video/mp4">
+        </video>
+
+        <audio id="sound"><source type="audio/mpeg"></audio>
+
+        <script type="module">
+            $(function () {
+    $('.open').click(function(){
+        $(this).parents().find('.guide').fadeIn(300);
+    }) 
+
+    $('.closed').click(function(){
+        $(this).parents().find('.guide').fadeOut(300);
+    })
+})
+
+import * as THREE from './three.js-dev/build/three.module.js';
+import * as dat from './three.js-dev/examples/jsm/libs/dat.gui.module.js';
+import {OrbitControls} from './three.js-dev/examples/jsm/controls/OrbitControls.js';
+import {OBJLoader} from './three.js-dev/examples/jsm/loaders/OBJLoader.js';
+import {MTLLoader} from './three.js-dev/examples/jsm/loaders/MTLLoader.js';
+import {GLTFLoader} from './three.js-dev/examples/jsm/loaders/GLTFLoader.js'
+
+let toFind = [];
+
+let threeCanvas = document.querySelector('#three')
+
+let renderer = new THREE.WebGLRenderer({canvas: threeCanvas, antialias: true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x311d41)
+renderer.setAnimationLoop(animate);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type =  THREE.PCFSoftShadowMap;
+
+renderer.toneMapping = THREE.LinearToneMapping;
+renderer.toneMappingExposure = 2;
+
+let scene = new THREE.Scene();
+
+let camera = new THREE.PerspectiveCamera(30, window.innerWidth/window.innerHeight, 0.01, 10000);
+camera.position.set(60,40,60);
+scene.add(camera);
+
+let light1 = new THREE.AmbientLight(0xffffff,0.5);
+scene.add(light1);
+
+let light2 = new THREE.DirectionalLight(0x4495ff,0.09);
+light2.position.set(-200,-65,200)
+scene.add(light2)
+
+let light3 = new THREE.DirectionalLight(0xff44f6,0.08);
+light3.position.set(200,-65,-200);
+scene.add(light3);
+
+scene.background = new THREE.TextureLoader().load('texture/image.png');
+
+// Promise
+let def1 = $.Deferred();
+
+
+$.when(def1).done(function(){
+    // alert("로딩 완료")
+    $('.loading').fadeOut(300);
+});
+
+//배경
+let objLoader = new OBJLoader();
+let mtlLoader = new MTLLoader();
+
+mtlLoader.load('models/mtl/background1.mtl', function(mtl){
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('models/obj/background1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+let gltfLoader = new GLTFLoader();
+
+let background
+
+gltfLoader.load('models/background.gltf', function(gltf){
+    background = gltf.scene;
+    background.name = 'background'
+    def1.resolve();
+    scene.add(background);
+});
+
+
+//미러볼 체인
+let objLoaderchain = new OBJLoader();
+let mtlLoaderchain = new MTLLoader();
+
+mtlLoaderchain.load('models/mtl/chain.mtl', function(mtl){
+    mtl.preload();
+    objLoaderchain.setMaterials(mtl);
+    objLoaderchain.load('models/obj/chain.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(8,0.5,8);
+        scene.add(obj);
+    });
+});
+
+
+//미러볼
+let loader = new THREE.TextureLoader();
+let plateTex = loader.load('texture/mirrorball.png');
+
+let mirrorballGeo = new THREE.SphereGeometry(2,28,28);
+let mirrorballMat = new THREE.MeshStandardMaterial({map: plateTex, roughness: 0.3, metalness: 0.1, flatShading:true});
+let mirrorball = new THREE.Mesh(mirrorballGeo, mirrorballMat);
+mirrorball.position.set(3,20.5,3);
+mirrorball.name = "mirrorball";
+scene.add(mirrorball);
+
+toFind.push(mirrorball);
+
+//라이트 BOX
+let lightBoxGeo = new THREE.BoxGeometry(2,2,2);
+let lightBoxMat = new THREE.MeshBasicMaterial({color: 0xffffff});
+let lightBox = new THREE.Mesh(lightBoxGeo, lightBoxMat);
+lightBox.visible = false;
+mirrorball.add(lightBox);
+
+// 미러볼 LED
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+makeLight(0x4495ff);
+
+
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+makeLight(0xff44f6);
+
+
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+makeLight(0xffffff);
+
+
+//기타 1
+let gltfLoaderguitar1 = new GLTFLoader();
+
+let objLoaderguitar1 = new OBJLoader();
+let mtlLoaderguitar1 = new MTLLoader();
+
+mtlLoaderguitar1.load('models/mtl/guitar1.mtl', function(mtl){
+    mtl.preload();
+    objLoaderguitar1.setMaterials(mtl);
+    objLoaderguitar1.load('models/obj/guitar1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.name = "guitar1";
+        scene.add(obj)
+
+        toFind.push( scene.getObjectByName('guitar1') )
+
+        gltfLoaderguitar1.load('models/guitar1.gltf', function(gltf){
+            let _guitar1 = gltf.scene;
+            _guitar1.rotation.x = Math.PI;
+            scene.getObjectByName('guitar1').add(_guitar1);
+        });
+    });
+});
+
+
+//기타 2
+let gltfLoaderguitar2 = new GLTFLoader();
+
+let objLoaderguitar2 = new OBJLoader();
+let mtlLoaderguitar2 = new MTLLoader();
+
+mtlLoaderguitar2.load('models/mtl/guitar2.mtl', function(mtl){
+    mtl.preload();
+    objLoaderguitar2.setMaterials(mtl);
+    objLoaderguitar2.load('models/obj/guitar2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.name = "guitar2";
+        scene.add(obj)
+
+        toFind.push( scene.getObjectByName('guitar2') )
+
+        gltfLoaderguitar2.load('models/guitar2.gltf', function(gltf){
+
+            let _guitar2 = gltf.scene;
+            _guitar2.rotation.x = Math.PI;
+            scene.getObjectByName('guitar2').add(_guitar2);
+        });
+    });
+});
+
+
+
+//탬버린 1
+let objLoadertambourine1 = new OBJLoader();
+let mtlLoadertambourine1 = new MTLLoader();
+
+mtlLoadertambourine1.load('models/mtl/tambourine1.mtl', function(mtl){
+    mtl.preload();
+    objLoadertambourine1.setMaterials(mtl);
+    objLoadertambourine1.load('models/obj/tambourine1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.name = "tambourine1";
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName('tambourine1') )
+    });
+});
+
+//탬버린 2
+let objLoadertambourine2 = new OBJLoader();
+let mtlLoadertambourine2 = new MTLLoader();
+
+mtlLoadertambourine2.load('models/mtl/tambourine2.mtl', function(mtl){
+    mtl.preload();
+    objLoadertambourine2.setMaterials(mtl);
+    objLoadertambourine2.load('models/obj/tambourine2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.name = "tambourine2";
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName('tambourine2') )
+    });
+});
+
+let mouse = new THREE.Vector2();
+$(window).on('mousemove', function(event){
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+});
+
+
+//마이크
+let objLoadermic = new OBJLoader();
+let mtlLoadermic = new MTLLoader();
+
+mtlLoadermic.load('models/mtl/mic.mtl', function(mtl){
+    mtl.preload();
+    objLoadermic.setMaterials(mtl);
+    objLoadermic.load('models/obj/mic.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.name = "MIC";
+        obj.position.set(-1,0,-1);
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName("MIC") )
+
+    });
+});
+
+//스포트라이트
+let spotlight1 = new THREE.SpotLight(0xffe1aa, 1, 100, 0.2, 0.3);
+spotlight1.position.set(-1,20,7.5);
+spotlight1.target.position.set(-1, 0, 7.5);
+scene.add(spotlight1);
+scene.add(spotlight1.target);
+
+//LED
+let objLoaderLED = new OBJLoader();
+let mtlLoaderLED = new MTLLoader();
+
+mtlLoaderLED.load('models/mtl/LED.mtl', function(mtl){
+    mtl.preload();
+    objLoaderLED.setMaterials(mtl);
+    objLoaderLED.load('models/obj/LED.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+//노래방 기기 led
+let gltfLoaderled = new GLTFLoader();
+
+let karaokeLED
+
+gltfLoaderled.load('models/karaokeLED.gltf', function(gltf){
+    karaokeLED = gltf.scene;
+    karaokeLED.name = 'karaokeLED'
+    scene.add(karaokeLED);
+});
+
+//노래방 화면
+let objLoaderdisplay = new OBJLoader();
+let mtlLoaderdisplay = new MTLLoader();
+
+mtlLoaderdisplay.load('models/mtl/display.mtl', function(mtl){
+    mtl.preload();
+    objLoaderdisplay.setMaterials(mtl);
+    objLoaderdisplay.load('models/obj/display.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+//버튼 1
+let objLoaderbtn1 = new OBJLoader();
+let mtlLoaderbtn1 = new MTLLoader();
+
+mtlLoaderbtn1.load('models/mtl/btn1.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn1.setMaterials(mtl);
+    objLoaderbtn1.load('models/obj/btn1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+//버튼 2
+let objLoaderbtn2 = new OBJLoader();
+let mtlLoaderbtn2 = new MTLLoader();
+
+mtlLoaderbtn2.load('models/mtl/btn2.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn2.setMaterials(mtl);
+    objLoaderbtn2.load('models/obj/btn2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+//버튼 3
+let objLoaderbtn3 = new OBJLoader();
+let mtlLoaderbtn3 = new MTLLoader();
+
+mtlLoaderbtn3.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn3.setMaterials(mtl);
+    objLoaderbtn3.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        scene.add(obj);
+    });
+});
+
+//버튼 4
+let objLoaderbtn4 = new OBJLoader();
+let mtlLoaderbtn4 = new MTLLoader();
+
+mtlLoaderbtn4.load('models/mtl/btn1.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn4.setMaterials(mtl);
+    objLoaderbtn4.load('models/obj/btn1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.2,0);
+        obj.position.set(0,-0.2,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 5
+let objLoaderbtn5 = new OBJLoader();
+let mtlLoaderbtn5 = new MTLLoader();
+
+mtlLoaderbtn5.load('models/mtl/btn2.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn5.setMaterials(mtl);
+    objLoaderbtn5.load('models/obj/btn2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.2,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 6
+let objLoaderbtn6 = new OBJLoader();
+let mtlLoaderbtn6 = new MTLLoader();
+
+mtlLoaderbtn6.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn6.setMaterials(mtl);
+    objLoaderbtn6.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.2,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 7
+let objLoaderbtn7 = new OBJLoader();
+let mtlLoaderbtn7 = new MTLLoader();
+
+mtlLoaderbtn7.load('models/mtl/btn1.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn7.setMaterials(mtl);
+    objLoaderbtn7.load('models/obj/btn1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.4,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 8
+let objLoaderbtn8 = new OBJLoader();
+let mtlLoaderbtn8 = new MTLLoader();
+
+mtlLoaderbtn8.load('models/mtl/btn2.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn8.setMaterials(mtl);
+    objLoaderbtn8.load('models/obj/btn2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.4,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 9
+let objLoaderbtn9 = new OBJLoader();
+let mtlLoaderbtn9 = new MTLLoader();
+
+mtlLoaderbtn9.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn9.setMaterials(mtl);
+    objLoaderbtn9.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.4,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 eco
+let objLoaderbtneco = new OBJLoader();
+let mtlLoaderbtneco = new MTLLoader();
+
+mtlLoaderbtneco.load('models/mtl/btn1.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtneco.setMaterials(mtl);
+    objLoaderbtneco.load('models/obj/btn1.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.6,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 0
+let objLoaderbtn0 = new OBJLoader();
+let mtlLoaderbtn0 = new MTLLoader();
+
+mtlLoaderbtn0.load('models/mtl/btn2.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtn0.setMaterials(mtl);
+    objLoaderbtn0.load('models/obj/btn2.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.6,0);
+        scene.add(obj);
+    });
+});
+
+//버튼 del
+let objLoaderbtndel = new OBJLoader();
+let mtlLoaderbtndel = new MTLLoader();
+
+mtlLoaderbtndel.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtndel.setMaterials(mtl);
+    objLoaderbtndel.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.6,0);
+        scene.add(obj);
+    });
+});
+
+
+//버튼 start
+let objLoaderbtnStart = new OBJLoader();
+let mtlLoaderbtnStart = new MTLLoader();
+
+mtlLoaderbtnStart.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtnStart.setMaterials(mtl);
+    objLoaderbtnStart.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,0,-0.44);
+        obj.name = "btnstart"
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName("btnstart") )
+    });
+});
+
+//버튼 Cancel
+let objLoaderbtnCancel = new OBJLoader();
+let mtlLoaderbtnCancel = new MTLLoader();
+
+mtlLoaderbtnCancel.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtnCancel.setMaterials(mtl);
+    objLoaderbtnCancel.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-0.2,-0.44);
+        obj.name = "btnCancel"
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName("btnCancel") )
+    });
+});
+
+//버튼 Fullver
+let objLoaderbtnFullver = new OBJLoader();
+let mtlLoaderbtnFullver = new MTLLoader();
+
+mtlLoaderbtnFullver.load('models/mtl/btn3.mtl', function(mtl){
+    mtl.preload();
+    objLoaderbtnFullver.setMaterials(mtl);
+    objLoaderbtnFullver.load('models/obj/btn3.obj', function(obj){
+        obj.rotation.x = Math.PI;
+        obj.position.set(0,-15.15,-0.44);
+        obj.scale.set(1,2.5,1);
+        obj.name = "Fullver"
+        scene.add(obj);
+
+        toFind.push( scene.getObjectByName("Fullver") )
+    });
+});
+
+
+let raycaster = new THREE.Raycaster();
+$('#three').click(function(){
+    raycaster.setFromCamera(mouse, camera)
+    let intersects = raycaster.intersectObjects( toFind, true );
+    console.log(intersects)
+    
+    if(intersects.length > 0){                
+        let foundMesh = intersects[0].object;
+
+        console.log(foundMesh.name)
+        
+        if( foundMesh.parent.name == "MIC" ){
+            moveCamera(7, 12, 8.8, -7, 12, 8.8, 800);
+
+            playSound('./sounds/00.mp3');
+
+            setTimeout(function(){
+                locateVideo();
+                playvideo('./video/00.mp4');
+            }, 1000)
+            
+
+            controls.enabled = false;
+        }
+
+        if( foundMesh.name == "mirrorball" ){
+            rotation();
+        }
+
+        if( foundMesh.parent.name == "guitar1" ){
+            playSound('./sounds/01.mp3');
+        }
+
+        if( foundMesh.parent.name == "guitar2" ){
+            playSound('./sounds/02.mp3');
+        }
+
+        if( foundMesh.parent.name == "tambourine1" ){
+            playSound('./sounds/03.mp3');
+        }
+
+        if( foundMesh.parent.name == "tambourine2" ){
+            playSound('./sounds/04.mp3');
+        }
+
+        if( foundMesh.parent.name == "btnstart" ){
+            playSound('./sounds/00.mp3');
+
+            replayvideo('./video/00.mp4');
+        }
+
+        if( foundMesh.parent.name == "btnCancel" ){
+            offSound('./sounds/00.mp3');
+
+            stopvideo('./video/00.mp4');
+        }
+
+        if( foundMesh.parent.name == "Fullver" ){
+            moveCamera(60, 40, 60, 0, 8, 0, 1000);
+
+            stopvideo('./video/00.mp4');
+
+            controls.enabled = true;
+        }
+    }
+})
+
+
+let controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 8, 0);
+
+let currentInt = null;
+
+function animate(time){
+    renderer.render(scene, camera);
+    controls.update();
+
+    TWEEN.update(time);
+}
+
+$(window).resize(function(){
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    locateVideo();
+})
+
+function moveCamera(_x, _y, _z, _tx, _ty, _tz, _d){
+    let ca = new TWEEN.Tween({
+            x: camera.position.x,
+            y: camera.position.y,
+            z: camera.position.z,
+            tx: controls.target.x,
+            ty: controls.target.y,
+            tz: controls.target.z,
+    })
+    .to({
+        x: _x,
+        y: _y,
+        z: _z,
+        tx: _tx,
+        ty: _ty,
+        tz: _tz,
+    }, _d)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(function(val){
+        camera.position.set( val.x, val.y, val.z );
+        controls.target = new THREE.Vector3( val.tx, val.ty, val.tz );
+    })
+    .start();
+}
+
+function playSound(_url){
+    $('#sound')[0].pause();
+    $('#sound').attr('src' , _url);
+    $('#sound')[0].play();
+}
+
+function offSound(_url){
+    $('#sound')[0].pause();
+}
+
+function playvideo(_url){
+    $('video').show();
+    $('video').get(0).currentTime = 0;
+    $('video').attr('src' , _url);
+    $('video').get(0).play();
+}
+
+function replayvideo(_url){
+    $('video').show();
+    $('video').get(0).currentTime = 0;
+    $('video').attr('src' , _url);
+    $('video').get(0).play();
+}
+
+function stopvideo(){
+    $('video').get(0).pause();
+    $('video').hide();
+}
+
+function locateVideo(){
+    let vh = window.innerHeight * 0.47;
+    let vw = vh * 16/9;
+
+    $('.musicvideo').css('width', vw);
+    $('.musicvideo').css('height', vh);
+}
+
+let animation1 = new TWEEN.Tween({ 
+        y: mirrorball.rotation.y,
+         })
+        .to({y: 2*Math.PI}, 9000)
+        .onUpdate(function(val){
+            mirrorball.rotation.y = val.y;
+        })
+        .repeat(Infinity)
+
+function rotation(){
+    
+    if( animation1.isPlaying() ){
+        animation1.stop();
+        lightBox.visible = false;
+    }else{
+        animation1.start();
+        lightBox.visible = true;
+    }
+}
+
+function makeLight(_color){
+    let mirrorballLED = new THREE.SpotLight(_color, 3, 50, 0.035, 0.3);
+    mirrorballLED.position.set(0, 0, 0);
+    mirrorballLED.target.position.set( (Math.random()-0.5)*2 , -Math.random() , (Math.random()-0.5)*2 );
+    lightBox.add(mirrorballLED);
+    lightBox.add(mirrorballLED.target);
+}
+        </script>
+    </body>
+</html>
